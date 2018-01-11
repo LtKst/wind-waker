@@ -5,7 +5,8 @@
 /// </summary>
 public class CameraController : MonoBehaviour {
 
-    public Transform CameraTarget;
+    [SerializeField]
+    private Transform CameraTarget;
     private float x = 0.0f;
     private float y = 0.0f;
 
@@ -13,7 +14,6 @@ public class CameraController : MonoBehaviour {
     private int mouseYSpeedMod = 5;
     
     public int ZoomRate = 20;
-    private int lerpRate = 5;
     [SerializeField]
     private float distance = 3f;
     private float desireDistance;
@@ -21,14 +21,8 @@ public class CameraController : MonoBehaviour {
     private float currentDistance;
 
     public float cameraTargetHeight = 1.0f;
-
-    //checks if first person mode is on
-    private bool click = false;
-    //stores cameras distance from player
-    private float curDist = 0;
-
-    // Use this for initialization
-    void Start() {
+    
+    private void Start() {
         Vector3 Angles = transform.eulerAngles;
         x = Angles.x;
         y = Angles.y;
@@ -36,9 +30,8 @@ public class CameraController : MonoBehaviour {
         desireDistance = distance;
         correctedDistance = distance;
     }
-
-    // Update is called once per frame
-    void LateUpdate() {
+    
+    private void LateUpdate() {
         x += Input.GetAxis("Mouse X") * mouseXSpeedMod;
         y += Input.GetAxis("Mouse Y") * mouseYSpeedMod;
 
@@ -59,31 +52,12 @@ public class CameraController : MonoBehaviour {
             isCorrected = true;
         }
 
-        //?
-        //condicion ? first_expresion : second_expresion;
-        //(input > 0) ? isPositive : isNegative;
-
         currentDistance = !isCorrected || correctedDistance > currentDistance ? Mathf.Lerp(currentDistance, correctedDistance, Time.deltaTime * ZoomRate) : correctedDistance;
 
         position = CameraTarget.position - (rotation * Vector3.forward * currentDistance + new Vector3(0, -cameraTargetHeight, 0));
 
         transform.rotation = rotation;
         transform.position = position;
-        
-        //checks if middle mouse button is pushed down
-        if (Input.GetMouseButtonDown(2)) {
-            //if middle mouse button is pressed 1st time set click to true and camera in front of player and save cameras position before mmb.
-            //if mmb is pressed again set camera back to it's position before we clicked mmb 1st time and set click to false
-            if (click == false) {
-                click = true;
-                curDist = distance;
-                distance = distance - distance - 1;
-            }
-            else {
-                distance = curDist;
-                click = false;
-            }
-        }
 
     }
 

@@ -28,12 +28,17 @@ public class PlayerController : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal") * movementSpeed;
         float vertical = Input.GetAxis("Vertical") * movementSpeed;
 
-        Vector3 velocity = new Vector3(horizontal, rb.velocity.y, vertical);
+        Vector3 forward = transform.forward * vertical;
+        Vector3 right = transform.right * horizontal;
 
-        rb.velocity = Vector3.Lerp(rb.velocity, velocity, accelerationSpeed * Time.deltaTime);
+        var moveDirection = forward + right;
+        moveDirection.y = rb.velocity.y;
 
-        float yRotation = Mathf.MoveTowards(transform.rotation.y, mainCamera.rotation.y, rotationSpeed * Time.deltaTime);
-        transform.rotation = new Quaternion(transform.rotation.x, yRotation, transform.rotation.z, transform.rotation.w);
+        rb.velocity = Vector3.Lerp(rb.velocity, moveDirection, accelerationSpeed * Time.deltaTime);
+
+        var cameraForward = mainCamera.transform.forward;
+        cameraForward.y = 0;
+        transform.rotation = Quaternion.LookRotation(cameraForward);
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded) {
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Acceleration);

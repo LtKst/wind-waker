@@ -142,8 +142,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 5
-  jumpHeight: 500
   accelerationSpeed: 50
+  jumpHeight: 200
+  rotationSpeed: 5
 --- !u!23 &665184941
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -328,7 +329,7 @@ MonoBehaviour:
   CameraTarget: {fileID: 665184944}
   ZoomRate: 20
   distance: 5
-  cameraTargetHeight: 0.31
+  cameraTargetHeight: 0.4
 --- !u!114 &1341737371
 MonoBehaviour:
   m_ObjectHideFlags: 0
