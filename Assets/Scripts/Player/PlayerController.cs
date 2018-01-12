@@ -6,39 +6,43 @@
 public class PlayerController : MonoBehaviour {
 
     [SerializeField]
-    private float movementSpeed;
+    private float movementSpeed = 5;
     [SerializeField]
     private float accelerationSpeed = 50;
     [SerializeField]
-    private float jumpHeight;
+    private float jumpHeight = 200;
     [SerializeField]
-    private float rotationSpeed;
+    private float rotationSpeed = 5;
 
     private bool grounded;
 
     private Rigidbody rb;
+    private Collider col;
     private Transform mainCamera;
 
     private void Start() {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
+
         mainCamera = Camera.main.transform;
     }
 
     private void Update() {
-        float horizontal = Input.GetAxis("Horizontal") * movementSpeed;
-        float vertical = Input.GetAxis("Vertical") * movementSpeed;
+        float vertical = Input.GetAxis("Vertical");
+        float horizontal = Input.GetAxis("Horizontal");
 
-        Vector3 forward = transform.forward * vertical;
-        Vector3 right = transform.right * horizontal;
+        if (horizontal != 0 || vertical != 0) {
+            Vector3 forward = transform.forward * movementSpeed;
+            forward.y = rb.velocity.y;
 
-        var moveDirection = forward + right;
-        moveDirection.y = rb.velocity.y;
+            rb.velocity = Vector3.Slerp(rb.velocity, forward, accelerationSpeed * Time.deltaTime);
 
-        rb.velocity = Vector3.Lerp(rb.velocity, moveDirection, accelerationSpeed * Time.deltaTime);
+            Vector3 facingDirection = mainCamera.forward * vertical + mainCamera.right * horizontal;
+            facingDirection.y = 0;
 
-        var cameraForward = mainCamera.transform.forward;
-        cameraForward.y = 0;
-        transform.rotation = Quaternion.LookRotation(cameraForward);
+            Quaternion targetRotation = Quaternion.LookRotation(facingDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space) && grounded) {
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Acceleration);
@@ -46,11 +50,11 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        RaycastHit hit;
+        Vector3 start = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 + 0.1f, transform.position.z);
+        Vector3 end = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 - 0.1f, transform.position.z);
 
-        Vector3 start = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2 + 0.1f, transform.position.z);
-        Vector3 end = new Vector3(transform.position.x, transform.position.y - transform.localScale.y / 2 - 0.1f, transform.position.z);
+        grounded = Physics.Raycast(start, end);
 
-        grounded = Physics.Raycast(start, end, out hit);
+        Debug.DrawLine(start, end, Color.red);
     }
 }
