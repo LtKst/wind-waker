@@ -25,7 +25,7 @@ public class Bow : MonoBehaviour {
             }
 
             if (Input.GetMouseButtonUp(0)) {
-                Shoot(_shotCharge * 200);
+                Shoot(_shotCharge * 25);
             }
 
             if (Input.GetMouseButtonDown(0)) {
