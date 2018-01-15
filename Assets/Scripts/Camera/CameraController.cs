@@ -13,14 +13,16 @@ public class CameraController : MonoBehaviour {
     private int mouseXSpeedMod = 5;
     private int mouseYSpeedMod = 5;
     
-    public int ZoomRate = 20;
+    [SerializeField]
+    private int ZoomRate = 20;
     [SerializeField]
     private float distance = 3f;
     private float desireDistance;
     private float correctedDistance;
     private float currentDistance;
 
-    public float cameraTargetHeight = 1.0f;
+    [SerializeField]
+    private float cameraTargetHeight = 1.0f;
     
     private void Start() {
         Vector3 Angles = transform.eulerAngles;
