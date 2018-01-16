@@ -21,6 +21,12 @@ public class CursorManager : MonoBehaviour {
         UpdateCursor();
     }
 
+    private void Update() {
+        if (Input.GetMouseButtonDown(0)) {
+            UpdateCursor();
+        }
+    }
+
     private void UpdateCursor() {
         if (lockCursor)
             Cursor.lockState = CursorLockMode.Locked;

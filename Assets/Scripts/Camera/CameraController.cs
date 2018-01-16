@@ -12,7 +12,7 @@ public class CameraController : MonoBehaviour {
 
     private int mouseXSpeedMod = 5;
     private int mouseYSpeedMod = 5;
-    
+
     [SerializeField]
     private int ZoomRate = 20;
     [SerializeField]

@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour {
 
         // Jumping
         if (Input.GetKeyDown(KeyCode.Space) && grounded) {
+            print("jump");
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Acceleration);
         }
     }
@@ -64,6 +65,8 @@ public class PlayerController : MonoBehaviour {
         Vector3 end = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 - 0.1f, transform.position.z);
 
         grounded = Physics.Raycast(start, end);
+
+        print(grounded);
 
         // Debug the grounded raycast
         Debug.DrawLine(start, end, Color.red);
