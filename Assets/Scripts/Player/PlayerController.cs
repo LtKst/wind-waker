@@ -10,19 +10,24 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float accelerationSpeed = 50;
     [SerializeField]
-    private float jumpHeight = 200;
-    [SerializeField]
     private float rotationSpeed = 5;
+    [SerializeField]
+    private float jumpHeight = 200;
 
     private bool grounded;
 
+    private PlayerAnimation playerAnimation;
+
     private Rigidbody rb;
-    private Collider col;
+    private CapsuleCollider col;
+
     private Transform mainCamera;
 
     private void Start() {
+        playerAnimation = GetComponent<PlayerAnimation>();
+
         rb = GetComponent<Rigidbody>();
-        col = GetComponent<Collider>();
+        col = GetComponent<CapsuleCollider>();
 
         mainCamera = Camera.main.transform;
     }
@@ -56,12 +61,14 @@ public class PlayerController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space) && grounded) {
             rb.AddForce(Vector3.up * jumpHeight, ForceMode.Acceleration);
         }
+
+        playerAnimation.UpdateAnimator(rb.velocity.magnitude, false, grounded);
     }
 
     private void FixedUpdate() {
         // Check if the player is grounded
-        Vector3 start = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 + 0.1f, transform.position.z);
-        Vector3 end = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 - 0.1f, transform.position.z);
+        Vector3 start = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 + 0.1f + col.center.y, transform.position.z);
+        Vector3 end = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 - 0.1f + col.center.y, transform.position.z);
 
         RaycastHit hit;
 

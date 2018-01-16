@@ -28,9 +28,11 @@ public class CursorManager : MonoBehaviour {
     }
 
     private void UpdateCursor() {
-        if (lockCursor)
+        if (lockCursor) {
             Cursor.lockState = CursorLockMode.Locked;
-        else
+        }
+        else {
             Cursor.lockState = CursorLockMode.None;
+        }
     }
 }
