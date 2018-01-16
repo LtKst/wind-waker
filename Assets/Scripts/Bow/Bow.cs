@@ -6,9 +6,14 @@ public class Bow : MonoBehaviour {
     private GameObject _player;
     public GameObject arrow;
     public GameObject currentArrow;
+    public Transform aimPos;
+    public Transform arrowPos;
     private float _shotCharge;
+    public float maxSpeed;
+    public float speed;
 
     private void Start() {
+        maxSpeed = 20;
         _player = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -35,18 +40,19 @@ public class Bow : MonoBehaviour {
     }
 
     private void Aim() {
-        Vector3 aimPos = new Vector3(_player.transform.position.x + 1, _player.transform.position.y, _player.transform.position.z);
-        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, aimPos, Time.deltaTime * 15);
+        //Vector3 aimPos = new Vector3(_player.transform.position.x + 1, _player.transform.position.y, _player.transform.position.z);
+        Camera.main.transform.position = Vector3.Lerp(Camera.main.transform.position, aimPos.position, Time.deltaTime * 15);
     }
 
     private void Shoot(float power) {
         print("void shoot");
-        currentArrow.GetComponent<Arrow>().AddVelocity(power);
+        speed = maxSpeed * power;
+        currentArrow.GetComponent<Arrow>().AddVelocity(speed);
         _shotCharge = 0f;
     }
 
     private void ChargeShot() {
-        if (_shotCharge <= 1.5f) {
+        if (_shotCharge <= 1) {
             print("charging");
             _shotCharge += 1 * Time.deltaTime;
         }
@@ -54,7 +60,8 @@ public class Bow : MonoBehaviour {
     }
     
     private void InstantiateArrow() {
-        currentArrow = Instantiate(arrow, new Vector3(2.5f, 1, 1.5f), Quaternion.identity);
+        currentArrow = Instantiate(arrow);
+        currentArrow.transform.position = arrowPos.position;
        
     }
 }

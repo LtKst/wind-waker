@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour {
     private Rigidbody _arrowRB;
-    private Rigidbody _childRB;
+    private BoxCollider _arrowColl;
+    private GameObject bow;
+    private float _maxSpeed;
+    private float _currentSpeed;
+    private float _clampSize;
 
     private void Start() {
+        bow = GameObject.FindGameObjectWithTag("Bow");
+        _maxSpeed = bow.GetComponent<Bow>().maxSpeed;
         _arrowRB = gameObject.GetComponent<Rigidbody>();
-        //_arrowRB.centerOfMass = new Vector3(0, 0, 10);
+        _arrowColl = gameObject.GetComponent<BoxCollider>();
         _arrowRB.isKinematic = true;
         
     }
@@ -16,8 +22,17 @@ public class Arrow : MonoBehaviour {
     public void AddVelocity(float power) {
         print("arrow.av");
         _arrowRB.isKinematic = false;
-
         _arrowRB.AddForce(transform.forward * power, ForceMode.Impulse);
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        _currentSpeed = bow.GetComponent<Bow>().speed;
+        _clampSize = Mathf.Clamp(_currentSpeed / _maxSpeed, 0.2f, 0.8f);
+        print(_clampSize);
+        Vector3 size = _arrowColl.size;
+        size.y = _clampSize;
+        _arrowColl.size = size;
+        _arrowRB.isKinematic = true;
     }
 
     void FixedUpdate() {
