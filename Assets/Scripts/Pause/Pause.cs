@@ -11,14 +11,18 @@ public class Pause : MonoBehaviour {
             return paused;
         }
     }
-
+    
     public static void PauseGame() {
         paused = true;
         Time.timeScale = 0;
-    }
 
+        EventManager.TriggerEvent("OnPauseChange");
+    }
+    
     public static void UnPauseGame() {
         paused = false;
         Time.timeScale = 1;
+
+        EventManager.TriggerEvent("OnPauseChange");
     }
 }

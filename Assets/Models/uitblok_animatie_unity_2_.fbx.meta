@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 6c460f3e2a92e47c7847b8852eb2fcff
-timeCreated: 1516099311
+guid: 87856d0f300544e2e80e52a3170226e1
+timeCreated: 1516102269
 licenseType: Free
 ModelImporter:
   serializedVersion: 21
@@ -774,6 +774,7 @@ ModelImporter:
     7400008: Crouch
     7400010: Crawl
     7400012: CrawlWalk
+    7400014: Grab
     9500000: //RootNode
     13700000: uit_blok_rig:Mesh_uit_blok
   materials:
@@ -792,7 +793,7 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -831,7 +832,7 @@ ModelImporter:
     - serializedVersion: 16
       name: Walk
       takeName: Take 001
-      firstFrame: 35
+      firstFrame: 36
       lastFrame: 74
       wrapMode: 0
       orientationOffsetY: 0
@@ -923,7 +924,35 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0.96
+    - serializedVersion: 16
+      name: Crawl
+      takeName: Take 001
+      firstFrame: 145
+      lastFrame: 155
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -941,10 +970,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: Crawl
+      name: CrawlWalk
       takeName: Take 001
-      firstFrame: 145
-      lastFrame: 155
+      firstFrame: 155
+      lastFrame: 175
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -969,10 +998,10 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: CrawlWalk
+      name: Grab
       takeName: Take 001
-      firstFrame: 155
-      lastFrame: 175
+      firstFrame: 180
+      lastFrame: 200
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
