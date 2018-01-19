@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Made by: Gijs Schouten.
+/// </summary>
+
 public class Arrow : MonoBehaviour {
     private Rigidbody _arrowRB;
     private BoxCollider _arrowColl;
@@ -26,13 +30,15 @@ public class Arrow : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        _currentSpeed = bow.GetComponent<Bow>().speed;
-        _clampSize = Mathf.Clamp(_currentSpeed / _maxSpeed, 0.2f, 0.8f);
-        print(_clampSize);
-        Vector3 size = _arrowColl.size;
-        size.y = _clampSize;
-        _arrowColl.size = size;
-        _arrowRB.isKinematic = true;
+        if (other.tag != "Arrow") {
+            _currentSpeed = bow.GetComponent<Bow>().speed;
+            _clampSize = Mathf.Clamp(_currentSpeed / _maxSpeed, 0.2f, 0.8f);
+            print(_clampSize);
+            Vector3 size = _arrowColl.size;
+            size.y = _clampSize;
+            _arrowColl.size = size;
+            _arrowRB.isKinematic = true;
+        }
     }
 
     void FixedUpdate() {
