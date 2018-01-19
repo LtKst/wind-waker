@@ -2,10 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Made by: Gijs Schouten.
+/// </summary>
+
 public class Bow : MonoBehaviour {
     private GameObject _player;
     public GameObject arrow;
     public GameObject currentArrow;
+    private GameObject prevArrow;
     public Transform aimPos;
     public Transform arrowPos;
     private float _shotCharge;
@@ -46,8 +51,11 @@ public class Bow : MonoBehaviour {
 
     private void Shoot(float power) {
         print("void shoot");
+        prevArrow = null;
+        prevArrow = currentArrow;
+        currentArrow = null;
         speed = maxSpeed * power;
-        currentArrow.GetComponent<Arrow>().AddVelocity(speed);
+        prevArrow.GetComponent<Arrow>().AddVelocity(speed);
         _shotCharge = 0f;
     }
 
@@ -55,8 +63,9 @@ public class Bow : MonoBehaviour {
         if (_shotCharge <= 1) {
             print("charging");
             _shotCharge += 1 * Time.deltaTime;
+            currentArrow.transform.position += Vector3.back * (Time.deltaTime / 3);
         }
-
+        
     }
     
     private void InstantiateArrow() {
