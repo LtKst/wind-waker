@@ -79,31 +79,30 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = Vector3.Slerp(rb.velocity, zero, accelerationSpeed * Time.deltaTime);
         }
 
-        if (crawling) {
+        /*if (crawling) {
             col.direction = 2;
         }
         else {
             col.direction = 1;
-        }
+        }*/
 
         // Jumping
-        if (Input.GetKeyDown(KeyCode.Space) && !crouching && grounded) {
+        if (Input.GetKeyDown(KeyCode.Space) && grounded && !crouching) {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
+        Debug.Log(grounded);
         playerAnimation.UpdateAnimator(rb.velocity.magnitude, crouching, crawling, grounded);
     }
 
     private void FixedUpdate() {
         // Check if the player is grounded
         Vector3 start = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 + 0.1f + col.center.y, transform.position.z);
-        Vector3 end = new Vector3(transform.position.x, transform.position.y - col.bounds.size.y / 2 - 0.1f + col.center.y, transform.position.z);
 
         RaycastHit hit;
 
-        grounded = Physics.Raycast(start, end, out hit) && hit.collider.tag != "Player";
+        grounded = Physics.Raycast(start, Vector3.down, out hit, 0.2f) && hit.collider.tag != "Player";
 
-        // Debug the grounded raycast
-        Debug.DrawLine(start, end, Color.red);
+        Debug.DrawRay(start, Vector3.down * 0.2f, Color.red);
     }
 }
