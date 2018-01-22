@@ -558,17 +558,10 @@ Prefab:
       propertyPath: m_LocalPosition.z
       value: -0.268
       objectReference: {fileID: 0}
-<<<<<<< HEAD
-    - target: {fileID: 2300000, guid: 1b4ae5e4a097cac4d8689f43161d9979, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 677270edf7e474eab93b1096f0511f98, type: 2}
-=======
     - target: {fileID: 100000, guid: 1b4ae5e4a097cac4d8689f43161d9979, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
->>>>>>> Gijs
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b4ae5e4a097cac4d8689f43161d9979, type: 3}
   m_IsPrefabParent: 0
