@@ -6,25 +6,28 @@
 public class CursorManager : MonoBehaviour {
 
     [SerializeField]
-    private bool lockCursor = false;
-    public bool LockCursor {
+    private CursorLockMode lockMode;
+    public CursorLockMode LockMode {
         get {
-            return lockCursor;
+            return lockMode;
         }
         set {
-            lockCursor = value;
-            UpdateCursor();
+            lockMode = value;
+            UpdateLockState();
         }
     }
 
     private void Start() {
-        UpdateCursor();
+        UpdateLockState();
     }
 
-    private void UpdateCursor() {
-        if (lockCursor)
-            Cursor.lockState = CursorLockMode.Locked;
-        else
-            Cursor.lockState = CursorLockMode.None;
+    private void Update() {
+        if (Input.GetMouseButtonDown(0)) {
+            UpdateLockState();
+        }
+    }
+
+    private void UpdateLockState() {
+        Cursor.lockState = lockMode;
     }
 }
