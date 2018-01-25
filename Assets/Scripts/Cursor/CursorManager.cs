@@ -18,6 +18,18 @@ public class CursorManager : MonoBehaviour {
     }
 
     private void Start() {
+        EventManager.StartListening("OnPauseChange", OnPauseChange);
+
+        UpdateLockState();
+    }
+    
+    private void OnPauseChange() {
+        if (Pause.Paused) {
+            lockMode = CursorLockMode.None;
+        } else {
+            lockMode = CursorLockMode.Locked;
+        }
+
         UpdateLockState();
     }
 

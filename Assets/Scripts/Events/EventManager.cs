@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.Events;
 
-public class EventManager : MonoBehaviour {
+public static class EventManager {
 
-    private  static Dictionary<string, UnityEvent> eventDictionary;
+    private  static Dictionary<string, UnityEvent> eventDictionary = new Dictionary<string, UnityEvent>();
 
     public static void StartListening(string eventName, UnityAction listener) {
         UnityEvent thisEvent = null;

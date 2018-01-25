@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour {
         float vertical = Input.GetAxis("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
 
-        crouching = Input.GetKey(KeyCode.LeftControl); ;
+        crouching = Input.GetKey(KeyCode.LeftControl);
 
         if (horizontal != 0 || vertical != 0) {
             crawling = Input.GetKey(KeyCode.LeftControl);
@@ -91,7 +91,6 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        Debug.Log(grounded);
         playerAnimation.UpdateAnimator(rb.velocity.magnitude, crouching, crawling, grounded);
     }
 
