@@ -6,21 +6,25 @@
 public class CameraController : MonoBehaviour {
 
     [SerializeField]
-    private Transform CameraTarget;
+    private bool autoTargetPlayer;
+    [SerializeField]
+    private Transform cameraTarget;
     private float x = 0.0f;
     private float y = 0.0f;
 
     private int mouseXSpeedMod = 5;
     private int mouseYSpeedMod = 5;
-    
-    public int ZoomRate = 20;
+
+    [SerializeField]
+    private int ZoomRate = 20;
     [SerializeField]
     private float distance = 3f;
     private float desireDistance;
     private float correctedDistance;
     private float currentDistance;
 
-    public float cameraTargetHeight = 1.0f;
+    [SerializeField]
+    private float cameraTargetHeight = 1.0f;
     
     private void Start() {
         Vector3 Angles = transform.eulerAngles;
@@ -29,36 +33,41 @@ public class CameraController : MonoBehaviour {
         currentDistance = distance;
         desireDistance = distance;
         correctedDistance = distance;
+
+        if (autoTargetPlayer) {
+            cameraTarget = GameObject.FindWithTag("Player").transform;
+        }
     }
     
     private void LateUpdate() {
-        x += Input.GetAxis("Mouse X") * mouseXSpeedMod;
-        y += Input.GetAxis("Mouse Y") * mouseYSpeedMod;
+        if (!Pause.Paused) {
+            x += Input.GetAxis("Mouse X") * mouseXSpeedMod;
+            y += Input.GetAxis("Mouse Y") * mouseYSpeedMod;
 
-        y = ClampAngle(y, -15, 25);
-        Quaternion rotation = Quaternion.Euler(y, x, 0);
-        
-        correctedDistance = desireDistance;
+            y = ClampAngle(y, -15, 25);
+            Quaternion rotation = Quaternion.Euler(y, x, 0);
 
-        Vector3 position = CameraTarget.position - (rotation * Vector3.forward * desireDistance);
+            correctedDistance = desireDistance;
 
-        RaycastHit collisionHit;
-        Vector3 cameraTargetPosition = new Vector3(CameraTarget.position.x, CameraTarget.position.y + cameraTargetHeight, CameraTarget.position.z);
+            Vector3 position = cameraTarget.position - (rotation * Vector3.forward * desireDistance);
 
-        bool isCorrected = false;
-        if (Physics.Linecast(cameraTargetPosition, position, out collisionHit)) {
-            position = collisionHit.point;
-            correctedDistance = Vector3.Distance(cameraTargetPosition, position);
-            isCorrected = true;
+            RaycastHit collisionHit;
+            Vector3 cameraTargetPosition = new Vector3(cameraTarget.position.x, cameraTarget.position.y + cameraTargetHeight, cameraTarget.position.z);
+
+            bool isCorrected = false;
+            if (Physics.Linecast(cameraTargetPosition, position, out collisionHit)) {
+                position = collisionHit.point;
+                correctedDistance = Vector3.Distance(cameraTargetPosition, position);
+                isCorrected = true;
+            }
+
+            currentDistance = !isCorrected || correctedDistance > currentDistance ? Mathf.Lerp(currentDistance, correctedDistance, Time.deltaTime * ZoomRate) : correctedDistance;
+
+            position = cameraTarget.position - (rotation * Vector3.forward * currentDistance + new Vector3(0, -cameraTargetHeight, 0));
+
+            transform.rotation = rotation;
+            transform.position = position;
         }
-
-        currentDistance = !isCorrected || correctedDistance > currentDistance ? Mathf.Lerp(currentDistance, correctedDistance, Time.deltaTime * ZoomRate) : correctedDistance;
-
-        position = CameraTarget.position - (rotation * Vector3.forward * currentDistance + new Vector3(0, -cameraTargetHeight, 0));
-
-        transform.rotation = rotation;
-        transform.position = position;
-
     }
 
     private static float ClampAngle(float angle, float min, float max) {
