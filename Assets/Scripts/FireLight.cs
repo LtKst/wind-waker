@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// 
+/// </summary>
 [RequireComponent(typeof(Light))]
 public class FireLight : MonoBehaviour {
 

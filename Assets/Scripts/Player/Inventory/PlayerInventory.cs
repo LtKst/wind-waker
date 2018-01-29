@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 /// <summary>
 /// Made by Koen Sparreboom
@@ -6,9 +7,12 @@
 public class PlayerInventory : MonoBehaviour {
 
     [SerializeField]
-    private BackItem[] backItems;
+    private EquipableItem[] backItems;
 
-    private BackItem equippedItem;
+    private EquipableItem equippedItem;
+
+    [SerializeField]
+    private float equipTime = 0.833334f;
 
     [SerializeField]
     private Transform back;
@@ -23,6 +27,8 @@ public class PlayerInventory : MonoBehaviour {
             backItems[i].Instance.transform.parent = back;
             backItems[i].Instance.transform.SetPositionAndRotation(back.position, back.rotation);
         }
+
+        EventManager.StartListening("OnGrabAnimationFinished", OnGrabAnimationFinished);
     }
 
     private void Update() {
@@ -37,21 +43,26 @@ public class PlayerInventory : MonoBehaviour {
         }
     }
 
-    private void EquipItem(BackItem item) {
+    private void EquipItem(EquipableItem item) {
         UnequipItem(equippedItem);
 
-        if (item.rightHand) {
-            item.Instance.transform.parent = rightHand;
-            item.Instance.transform.SetPositionAndRotation(rightHand.position, rightHand.rotation);
-        } else {
-            item.Instance.transform.parent = leftHand;
-            item.Instance.transform.SetPositionAndRotation(leftHand.position, leftHand.rotation);
-        }
+        GetComponent<Animator>().SetTrigger("Grabbing");
 
         equippedItem = item;
     }
 
-    private void UnequipItem(BackItem item) {
+    private void OnGrabAnimationFinished() {
+        if (equippedItem.equipSlot == EquipableItem.EquipSlot.Right) {
+            equippedItem.Instance.transform.parent = rightHand;
+            equippedItem.Instance.transform.SetPositionAndRotation(rightHand.position, rightHand.rotation);
+        }
+        else {
+            equippedItem.Instance.transform.parent = leftHand;
+            equippedItem.Instance.transform.SetPositionAndRotation(leftHand.position, leftHand.rotation);
+        }
+    }
+
+    private void UnequipItem(EquipableItem item) {
         if (item != null) {
             item.Instance.transform.parent = back;
             item.Instance.transform.SetPositionAndRotation(back.position, back.rotation);
