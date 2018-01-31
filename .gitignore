@@ -32,3 +32,9 @@ sysinfo.txt
 # Builds
 *.apk
 *.unitypackage
+
+Assets/uitblok_animatie_unity.controller
+
+Assets/uitblok_animatie_unity.controller.meta
+
+Assets/uitblok_animatie_unity.fbx.meta
