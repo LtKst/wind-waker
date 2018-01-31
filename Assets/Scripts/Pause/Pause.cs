@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
+/// A script for pausing or unpausing the game
 /// Made by Koen Sparreboom
 /// </summary>
 public class Pause : MonoBehaviour {

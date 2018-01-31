@@ -3,12 +3,12 @@
 /// <summary>
 /// Made by Koen Sparreboom
 /// </summary>
-[RequireComponent(typeof(PlayerAnimation))]
+[RequireComponent(typeof(PlayerAnimator))]
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
 public class PlayerController : MonoBehaviour {
 
-    private PlayerAnimation playerAnimation;
+    private PlayerAnimator playerAnimation;
     private Rigidbody rb;
     private CapsuleCollider col;
     private Transform mainCamera;
@@ -26,21 +26,15 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float jumpForce = 5;
 
-    private float initialColliderY;
-    [SerializeField]
-    private float crawlColliderY;
-
     private bool crouching;
     private bool crawling;
     private bool grounded;
 
     private void Start() {
-        playerAnimation = GetComponent<PlayerAnimation>();
+        playerAnimation = GetComponent<PlayerAnimator>();
         rb = GetComponent<Rigidbody>();
         col = GetComponent<CapsuleCollider>();
         mainCamera = Camera.main.transform;
-
-        initialColliderY = col.center.y;
     }
 
     private void Update() {
@@ -50,11 +44,13 @@ public class PlayerController : MonoBehaviour {
         crouching = Input.GetKey(KeyCode.LeftControl);
 
         if (horizontal != 0 || vertical != 0) {
-            crawling = Input.GetKey(KeyCode.LeftControl);
+            if (Input.GetKey(KeyCode.LeftControl)) {
+                crawling = true;
+            }
 
             float speed = Input.GetKey(KeyCode.LeftShift) ? walkSpeed : runSpeed;
 
-            if (crouching) {
+            if (crawling) {
                 speed *= crawlMultiplier;
             }
 
@@ -77,14 +73,11 @@ public class PlayerController : MonoBehaviour {
             zero.y = rb.velocity.y;
 
             rb.velocity = Vector3.Slerp(rb.velocity, zero, accelerationSpeed * Time.deltaTime);
-        }
 
-        /*if (crawling) {
-            col.direction = 2;
+            if (!Input.GetKey(KeyCode.LeftControl)) {
+                crawling = false;
+            }
         }
-        else {
-            col.direction = 1;
-        }*/
 
         // Jumping
         if (Input.GetKeyDown(KeyCode.Space) && grounded && !crouching) {
@@ -101,7 +94,5 @@ public class PlayerController : MonoBehaviour {
         RaycastHit hit;
 
         grounded = Physics.Raycast(start, Vector3.down, out hit, 0.2f) && hit.collider.tag != "Player";
-
-        Debug.DrawRay(start, Vector3.down * 0.2f, Color.red);
     }
 }

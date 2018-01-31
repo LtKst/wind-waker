@@ -1,18 +1,18 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Made by Koen Sparreboom
 /// </summary>
+[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerInventory : MonoBehaviour {
+
+    private PlayerAnimator playerAnimator;
 
     [SerializeField]
     private EquipableItem[] backItems;
 
     private EquipableItem equippedItem;
-
-    [SerializeField]
-    private float equipTime = 0.833334f;
+    private EquipableItem unequippedItem;
 
     [SerializeField]
     private Transform back;
@@ -23,6 +23,8 @@ public class PlayerInventory : MonoBehaviour {
     private Transform rightHand;
 
     private void Start() {
+        playerAnimator = GetComponent<PlayerAnimator>();
+
         for (int i = 0; i < backItems.Length; i++) {
             backItems[i].Instance.transform.parent = back;
             backItems[i].Instance.transform.SetPositionAndRotation(back.position, back.rotation);
@@ -36,7 +38,8 @@ public class PlayerInventory : MonoBehaviour {
             if (Input.GetKeyDown(backItems[i].equipKeyCode)) {
                 if (equippedItem == backItems[i]) {
                     UnequipItem(backItems[i]);
-                } else {
+                }
+                else {
                     EquipItem(backItems[i]);
                 }
             }
@@ -44,14 +47,23 @@ public class PlayerInventory : MonoBehaviour {
     }
 
     private void EquipItem(EquipableItem item) {
-        UnequipItem(equippedItem);
+        if (equippedItem != null && equippedItem.equipSlot == item.equipSlot) {
+            UnequipItem(equippedItem);
+        }
 
-        GetComponent<Animator>().SetTrigger("Grabbing");
+        playerAnimator.StartEquipAnimation();
 
         equippedItem = item;
     }
 
+    private void UnequipItem(EquipableItem item) {
+        unequippedItem = item;
+
+        playerAnimator.StartEquipAnimation();
+    }
+
     private void OnGrabAnimationFinished() {
+        // Equip
         if (equippedItem.equipSlot == EquipableItem.EquipSlot.Right) {
             equippedItem.Instance.transform.parent = rightHand;
             equippedItem.Instance.transform.SetPositionAndRotation(rightHand.position, rightHand.rotation);
@@ -60,16 +72,17 @@ public class PlayerInventory : MonoBehaviour {
             equippedItem.Instance.transform.parent = leftHand;
             equippedItem.Instance.transform.SetPositionAndRotation(leftHand.position, leftHand.rotation);
         }
-    }
 
-    private void UnequipItem(EquipableItem item) {
-        if (item != null) {
-            item.Instance.transform.parent = back;
-            item.Instance.transform.SetPositionAndRotation(back.position, back.rotation);
+        // Unequip
+        if (unequippedItem != null) {
+            unequippedItem.Instance.transform.parent = back;
+            unequippedItem.Instance.transform.SetPositionAndRotation(back.position, back.rotation);
 
-            if (equippedItem == item) {
+            if (equippedItem == unequippedItem) {
                 equippedItem = null;
             }
+
+            unequippedItem = null;
         }
     }
 }
