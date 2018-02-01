@@ -22,11 +22,12 @@ public class CursorManager : MonoBehaviour {
 
         UpdateLockState();
     }
-    
+
     private void OnPauseChange() {
         if (Pause.Paused) {
             lockMode = CursorLockMode.None;
-        } else {
+        }
+        else {
             lockMode = CursorLockMode.Locked;
         }
 

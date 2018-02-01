@@ -12,11 +12,11 @@ public class Sword : MonoBehaviour {
         EventManager.StartListening("OnSwingEnd", OnSwingEnd);
     }
 
-    void OnSwingStart() {
+    private void OnSwingStart() {
         swinging = true;
     }
 
-    void OnSwingEnd() {
+    private void OnSwingEnd() {
         swinging = false;
     }
 

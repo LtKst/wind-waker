@@ -84,7 +84,7 @@ public class PlayerController : MonoBehaviour {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
 
-        playerAnimation.UpdateAnimator(rb.velocity.magnitude, crouching, crawling, grounded);
+        playerAnimation.SetBaseValues(rb.velocity.magnitude, crouching, crawling, grounded);
     }
 
     private void FixedUpdate() {

@@ -53,7 +53,8 @@ public class PlayerInventory : MonoBehaviour {
 
         if (item.equipSlot == EquipableItem.EquipSlot.Right) {
             rightHand = item;
-        } else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
+        }
+        else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
             leftHand = item;
         }
 
@@ -67,7 +68,8 @@ public class PlayerInventory : MonoBehaviour {
 
         if (item.equipSlot == EquipableItem.EquipSlot.Right) {
             rightHand = null;
-        } else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
+        }
+        else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
             leftHand = null;
         }
 
