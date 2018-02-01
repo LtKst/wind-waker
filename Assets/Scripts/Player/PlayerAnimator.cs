@@ -6,7 +6,8 @@
 [RequireComponent(typeof(Animator))]
 public class PlayerAnimator : MonoBehaviour {
 
-    private Animator animator;
+    [HideInInspector]
+    public Animator animator;
 
     private void Start() {
         animator = GetComponent<Animator>();
@@ -24,12 +25,5 @@ public class PlayerAnimator : MonoBehaviour {
         animator.SetBool("Crouching", crouching);
         animator.SetBool("Crawling", crawling);
         animator.SetBool("Grounded", grounded);
-    }
-
-    /// <summary>
-    /// Start the equip animation
-    /// </summary>
-    public void StartEquipAnimation() {
-        animator.SetTrigger("Grab");
     }
 }

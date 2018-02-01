@@ -3,7 +3,7 @@ guid: 32bd2266929c9ea4192036ff027d287b
 timeCreated: 1517397585
 licenseType: Free
 ModelImporter:
-  serializedVersion: 22
+  serializedVersion: 21
   fileIDToRecycleName:
     100000: __mixamo_rig_link_plus_exta_joints_controlers:AnimData_Head
     100002: __mixamo_rig_link_plus_exta_joints_controlers:AnimData_HeadTop_End
@@ -1215,8 +1215,8 @@ ModelImporter:
     7400010: JumpIdle
     7400012: Land
     7400014: Crouch
-    7400016: EnterCrouch
-    7400018: CrouchWalk
+    7400016: EnterCrawl
+    7400018: CrawlWalk
     7400020: Equip
     7400022: Attack_01
     7400024: Attack_02
@@ -1237,22 +1237,10 @@ ModelImporter:
     7400054: Death
     9500000: //RootNode
     13700000: __mixamo_rig_link_plus_exta_joints_controlers:Mesh_link___
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: __mixamo_rig_link_plus_exta_joints_controlers_body
-    second: {fileID: 2100000, guid: 978fbe0c7aea7224fb7a017c4a704f69, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: __mixamo_rig_link_plus_exta_joints_controlers_face
-    second: {fileID: 2100000, guid: 03dbadfaa53a4284189f26955f4d8a99, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
@@ -1265,7 +1253,6 @@ ModelImporter:
     animationImportWarnings: 
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
-    importAnimatedCustomProperties: 0
     animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -1499,7 +1486,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: EnterCrouch
+      name: EnterCrawl
       takeName: Take 001
       firstFrame: 290
       lastFrame: 310
@@ -1527,7 +1514,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: CrouchWalk
+      name: CrawlWalk
       takeName: Take 001
       firstFrame: 315
       lastFrame: 355

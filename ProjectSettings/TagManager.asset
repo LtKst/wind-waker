@@ -7,6 +7,7 @@ TagManager:
   - Bow
   - Arrow
   - Shield
+  - Grip
   layers:
   - Default
   - TransparentFX

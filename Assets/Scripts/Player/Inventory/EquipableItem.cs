@@ -13,6 +13,7 @@ public class EquipableItem {
     public KeyCode equipKeyCode = KeyCode.Alpha1;
     public enum EquipSlot { Left, Right }
     public EquipSlot equipSlot = EquipSlot.Right;
+    public Transform pivotPoint;
     public Sprite icon;
 
     private GameObject instance;

@@ -9,38 +9,38 @@ public class PlayerInventory : MonoBehaviour {
     private PlayerAnimator playerAnimator;
 
     [SerializeField]
-    private EquipableItem[] backItems;
+    private EquipableItem[] storedItems;
 
     private EquipableItem equippedItem;
     private EquipableItem unequippedItem;
 
     [SerializeField]
-    private Transform back;
+    private Transform backPivot;
 
-    [SerializeField]
-    private Transform leftHand;
-    [SerializeField]
-    private Transform rightHand;
+    [HideInInspector]
+    public EquipableItem rightHand;
+    [HideInInspector]
+    public EquipableItem leftHand;
 
     private void Start() {
         playerAnimator = GetComponent<PlayerAnimator>();
 
-        for (int i = 0; i < backItems.Length; i++) {
-            backItems[i].Instance.transform.parent = back;
-            backItems[i].Instance.transform.SetPositionAndRotation(back.position, back.rotation);
+        for (int i = 0; i < storedItems.Length; i++) {
+            storedItems[i].Instance.transform.parent = backPivot;
+            storedItems[i].Instance.transform.SetPositionAndRotation(backPivot.position, backPivot.rotation);
         }
 
         EventManager.StartListening("OnGrabAnimationFinished", OnGrabAnimationFinished);
     }
 
     private void Update() {
-        for (int i = 0; i < backItems.Length; i++) {
-            if (Input.GetKeyDown(backItems[i].equipKeyCode)) {
-                if (equippedItem == backItems[i]) {
-                    UnequipItem(backItems[i]);
+        for (int i = 0; i < storedItems.Length; i++) {
+            if (Input.GetKeyDown(storedItems[i].equipKeyCode)) {
+                if (equippedItem == storedItems[i]) {
+                    UnequipItem(storedItems[i]);
                 }
                 else {
-                    EquipItem(backItems[i]);
+                    EquipItem(storedItems[i]);
                 }
             }
         }
@@ -51,7 +51,13 @@ public class PlayerInventory : MonoBehaviour {
             UnequipItem(equippedItem);
         }
 
-        playerAnimator.StartEquipAnimation();
+        if (item.equipSlot == EquipableItem.EquipSlot.Right) {
+            rightHand = item;
+        } else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
+            leftHand = item;
+        }
+
+        playerAnimator.animator.SetTrigger("Grab");
 
         equippedItem = item;
     }
@@ -59,24 +65,24 @@ public class PlayerInventory : MonoBehaviour {
     private void UnequipItem(EquipableItem item) {
         unequippedItem = item;
 
-        playerAnimator.StartEquipAnimation();
+        if (item.equipSlot == EquipableItem.EquipSlot.Right) {
+            rightHand = null;
+        } else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
+            leftHand = null;
+        }
+
+        playerAnimator.animator.SetTrigger("Grab");
     }
 
     private void OnGrabAnimationFinished() {
         // Equip
-        if (equippedItem.equipSlot == EquipableItem.EquipSlot.Right) {
-            equippedItem.Instance.transform.parent = rightHand;
-            equippedItem.Instance.transform.SetPositionAndRotation(rightHand.position, rightHand.rotation);
-        }
-        else {
-            equippedItem.Instance.transform.parent = leftHand;
-            equippedItem.Instance.transform.SetPositionAndRotation(leftHand.position, leftHand.rotation);
-        }
+        equippedItem.Instance.transform.parent = equippedItem.pivotPoint;
+        equippedItem.Instance.transform.SetPositionAndRotation(equippedItem.pivotPoint.position, equippedItem.pivotPoint.rotation);
 
         // Unequip
         if (unequippedItem != null) {
-            unequippedItem.Instance.transform.parent = back;
-            unequippedItem.Instance.transform.SetPositionAndRotation(back.position, back.rotation);
+            unequippedItem.Instance.transform.parent = backPivot;
+            unequippedItem.Instance.transform.SetPositionAndRotation(backPivot.position, backPivot.rotation);
 
             if (equippedItem == unequippedItem) {
                 equippedItem = null;
