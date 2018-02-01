@@ -78,8 +78,15 @@ public class PlayerInventory : MonoBehaviour {
 
     private void OnGrabAnimationFinished() {
         // Equip
-        equippedItem.Instance.transform.parent = equippedItem.pivotPoint;
-        equippedItem.Instance.transform.SetPositionAndRotation(equippedItem.pivotPoint.position, equippedItem.pivotPoint.rotation);
+        if (rightHand != null) {
+            rightHand.Instance.transform.parent = rightHand.pivotPoint;
+            rightHand.Instance.transform.SetPositionAndRotation(rightHand.pivotPoint.position, rightHand.pivotPoint.rotation);
+        }
+
+        if (leftHand != null) {
+            leftHand.Instance.transform.parent = leftHand.pivotPoint;
+            leftHand.Instance.transform.SetPositionAndRotation(leftHand.pivotPoint.position, leftHand.pivotPoint.rotation);
+        }
 
         // Unequip
         if (unequippedItem != null) {

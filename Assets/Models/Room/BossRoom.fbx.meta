@@ -1,0 +1,380 @@
+fileFormatVersion: 2
+guid: 1c2aed397500d194f86d3a118e72ee1a
+timeCreated: 1517501809
+licenseType: Free
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: arena
+    100002: //RootNode
+    100004: dak
+    100006: dak2
+    100008: deur
+    100010: L_deur_muur_2_In
+    100012: pCube1
+    100014: R_deur_muur_1
+    100016: vloer
+    100018: zand
+    100020: zand 1
+    100022: zand 2
+    100024: zand 3
+    100026: zand 4
+    100028: zand 5
+    100030: zand 6
+    100032: zand 7
+    100034: zand 8
+    100036: zand 9
+    100038: zand1
+    100040: zand1 1
+    100042: zand1 2
+    100044: zand1 3
+    100046: zand1 4
+    100048: zand1 5
+    100050: zand1 6
+    100052: zand10
+    100054: zand11
+    100056: zand12
+    100058: zand13
+    100060: zand14
+    100062: zand15
+    100064: zand16
+    100066: zand17
+    100068: zand2
+    100070: zand2 1
+    100072: zand2 2
+    100074: zand2 3
+    100076: zand2 4
+    100078: zand2 5
+    100080: zand2 6
+    100082: zand2 7
+    100084: zand2 8
+    100086: zand3
+    100088: zand3 1
+    100090: zand3 2
+    100092: zand3 3
+    100094: zand3 4
+    100096: zand3 5
+    100098: zand3 6
+    100100: zand3 7
+    100102: zand3 8
+    100104: zand4
+    100106: zand4 1
+    100108: zand4 2
+    100110: zand4 3
+    100112: zand4 4
+    100114: zand4 5
+    100116: zand4 6
+    100118: zand4 7
+    100120: zand5
+    100122: zand6
+    100124: zand8
+    100126: zand9
+    400000: arena
+    400002: //RootNode
+    400004: dak
+    400006: dak2
+    400008: deur
+    400010: L_deur_muur_2_In
+    400012: pCube1
+    400014: R_deur_muur_1
+    400016: vloer
+    400018: zand
+    400020: zand 1
+    400022: zand 2
+    400024: zand 3
+    400026: zand 4
+    400028: zand 5
+    400030: zand 6
+    400032: zand 7
+    400034: zand 8
+    400036: zand 9
+    400038: zand1
+    400040: zand1 1
+    400042: zand1 2
+    400044: zand1 3
+    400046: zand1 4
+    400048: zand1 5
+    400050: zand1 6
+    400052: zand10
+    400054: zand11
+    400056: zand12
+    400058: zand13
+    400060: zand14
+    400062: zand15
+    400064: zand16
+    400066: zand17
+    400068: zand2
+    400070: zand2 1
+    400072: zand2 2
+    400074: zand2 3
+    400076: zand2 4
+    400078: zand2 5
+    400080: zand2 6
+    400082: zand2 7
+    400084: zand2 8
+    400086: zand3
+    400088: zand3 1
+    400090: zand3 2
+    400092: zand3 3
+    400094: zand3 4
+    400096: zand3 5
+    400098: zand3 6
+    400100: zand3 7
+    400102: zand3 8
+    400104: zand4
+    400106: zand4 1
+    400108: zand4 2
+    400110: zand4 3
+    400112: zand4 4
+    400114: zand4 5
+    400116: zand4 6
+    400118: zand4 7
+    400120: zand5
+    400122: zand6
+    400124: zand8
+    400126: zand9
+    2100000: muuren
+    2100002: deur1
+    2100004: paalen
+    2100006: top_deur
+    2100008: lambert1
+    2100010: zand7
+    2100012: vloer2
+    2100014: dak1
+    2300000: arena
+    2300002: dak
+    2300004: dak2
+    2300006: deur
+    2300008: L_deur_muur_2_In
+    2300010: pCube1
+    2300012: R_deur_muur_1
+    2300014: vloer
+    2300016: zand 1
+    2300018: zand 2
+    2300020: zand 3
+    2300022: zand 4
+    2300024: zand 5
+    2300026: zand 6
+    2300028: zand 7
+    2300030: zand 8
+    2300032: zand 9
+    2300034: zand1
+    2300036: zand1 1
+    2300038: zand1 2
+    2300040: zand1 3
+    2300042: zand1 4
+    2300044: zand1 5
+    2300046: zand1 6
+    2300048: zand2
+    2300050: zand2 1
+    2300052: zand2 2
+    2300054: zand2 3
+    2300056: zand2 4
+    2300058: zand2 5
+    2300060: zand2 6
+    2300062: zand2 7
+    2300064: zand2 8
+    2300066: zand3
+    2300068: zand3 1
+    2300070: zand3 2
+    2300072: zand3 3
+    2300074: zand3 4
+    2300076: zand3 5
+    2300078: zand3 6
+    2300080: zand3 7
+    2300082: zand3 8
+    2300084: zand4
+    2300086: zand4 1
+    2300088: zand4 2
+    2300090: zand4 3
+    2300092: zand4 4
+    2300094: zand4 5
+    2300096: zand4 6
+    2300098: zand4 7
+    2300100: zand5
+    2300102: zand6
+    3300000: arena
+    3300002: dak
+    3300004: dak2
+    3300006: deur
+    3300008: L_deur_muur_2_In
+    3300010: pCube1
+    3300012: R_deur_muur_1
+    3300014: vloer
+    3300016: zand 1
+    3300018: zand 2
+    3300020: zand 3
+    3300022: zand 4
+    3300024: zand 5
+    3300026: zand 6
+    3300028: zand 7
+    3300030: zand 8
+    3300032: zand 9
+    3300034: zand1
+    3300036: zand1 1
+    3300038: zand1 2
+    3300040: zand1 3
+    3300042: zand1 4
+    3300044: zand1 5
+    3300046: zand1 6
+    3300048: zand2
+    3300050: zand2 1
+    3300052: zand2 2
+    3300054: zand2 3
+    3300056: zand2 4
+    3300058: zand2 5
+    3300060: zand2 6
+    3300062: zand2 7
+    3300064: zand2 8
+    3300066: zand3
+    3300068: zand3 1
+    3300070: zand3 2
+    3300072: zand3 3
+    3300074: zand3 4
+    3300076: zand3 5
+    3300078: zand3 6
+    3300080: zand3 7
+    3300082: zand3 8
+    3300084: zand4
+    3300086: zand4 1
+    3300088: zand4 2
+    3300090: zand4 3
+    3300092: zand4 4
+    3300094: zand4 5
+    3300096: zand4 6
+    3300098: zand4 7
+    3300100: zand5
+    3300102: zand6
+    4300000: arena
+    4300002: deur
+    4300004: R_deur_muur_1
+    4300006: L_deur_muur_2_In
+    4300008: dak
+    4300010: pCube1
+    4300012: zand
+    4300014: zand1
+    4300016: zand2
+    4300018: zand3
+    4300020: zand4
+    4300022: zand5
+    4300024: zand6
+    4300026: zand
+    4300028: zand2
+    4300030: zand3
+    4300032: zand4
+    4300034: zand
+    4300036: zand1
+    4300038: zand2
+    4300040: zand3
+    4300042: zand4
+    4300044: zand
+    4300046: zand1
+    4300048: zand4
+    4300050: zand
+    4300052: zand1
+    4300054: zand2
+    4300056: zand3
+    4300058: zand1
+    4300060: zand2
+    4300062: zand3
+    4300064: zand4
+    4300066: zand
+    4300068: zand1
+    4300070: zand2
+    4300072: zand3
+    4300074: zand
+    4300076: zand2
+    4300078: zand3
+    4300080: zand4
+    4300082: zand
+    4300084: zand1
+    4300086: zand2
+    4300088: zand4
+    4300090: zand2
+    4300092: zand3
+    4300094: zand
+    4300096: zand3
+    4300098: zand4
+    4300100: vloer
+    4300102: dak2
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 12
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

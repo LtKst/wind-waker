@@ -7,12 +7,23 @@ public class Sword : MonoBehaviour {
 
     private bool swinging = false;
 
+    [SerializeField]
+    private int damage = 7;
+
+    [SerializeField]
+    private AudioClip[] attackClips;
+    private AudioSource audioSource;
+
+
     private void Start() {
+        audioSource = GetComponent<AudioSource>();
+
         EventManager.StartListening("OnSwingStart", OnSwingStart);
         EventManager.StartListening("OnSwingEnd", OnSwingEnd);
     }
 
     private void OnSwingStart() {
+        audioSource.PlayOneShot(attackClips[Random.Range(0, attackClips.Length - 1)]);
         swinging = true;
     }
 
@@ -22,7 +33,9 @@ public class Sword : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (swinging) {
-            print(other.name);
+            if (other.GetComponent<BossHealth>()) {
+                other.GetComponent<BossHealth>().TakeDamage(damage);
+            }
         }
     }
 }
