@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 
 /// <summary>
+/// Easy access to the player's animator
 /// Made by Koen Sparreboom
 /// </summary>
 [RequireComponent(typeof(Animator))]

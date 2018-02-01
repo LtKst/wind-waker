@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Made by Koen Sparreboom
+/// </summary>
 public class Sword : MonoBehaviour {
 
     private bool swinging = false;

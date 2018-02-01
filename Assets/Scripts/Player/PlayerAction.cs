@@ -1,5 +1,8 @@
 ﻿using UnityEngine;
 
+/// <summary>
+/// Made by Koen Sparreboom
+/// </summary>
 [RequireComponent(typeof(PlayerInventory))]
 [RequireComponent(typeof(PlayerAnimator))]
 public class PlayerAction : MonoBehaviour {
