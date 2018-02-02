@@ -9,6 +9,9 @@ public class BossHealth : MonoBehaviour {
     private int health = 100;
     public bool isDead;
 
+    [SerializeField]
+    private GameObject[] wings;
+
     private Animator animator;
 
     [SerializeField]
@@ -28,6 +31,11 @@ public class BossHealth : MonoBehaviour {
 
             if (health <= 0) {
                 isDead = true;
+
+                foreach(GameObject obj in wings) {
+                    obj.SetActive(false);
+                }
+
                 animator.SetBool("Dead", true);
             }
             else {

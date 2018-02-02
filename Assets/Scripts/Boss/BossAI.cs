@@ -20,7 +20,7 @@ public class BossAI : MonoBehaviour {
 
     private Transform player;
 
-    private enum Attacks { Punch, Whirlwind }
+    private enum Attacks { Punch, Whirlwind, Pause }
     private Attacks attack;
 
     private void Start() {
@@ -45,11 +45,21 @@ public class BossAI : MonoBehaviour {
                     animator.SetTrigger("Smash");
                     break;
                 case Attacks.Whirlwind:
-                    print("whirlwind");
-
                     animator.SetTrigger("Smash");
                     GameObject whirlwindInstance = Instantiate(whirlwind);
                     whirlwindInstance.transform.position = transform.position;
+                    break;
+                case Attacks.Pause:
+                    Vector3 pos = transform.position;
+
+                    if (transform.position.y == air) {
+                        pos.y = ground;
+                    } else {
+                        pos.y = air;
+                    }
+
+                    transform.position = pos;
+
                     break;
             }
 
