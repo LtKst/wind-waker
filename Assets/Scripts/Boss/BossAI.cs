@@ -9,4 +9,14 @@ public class BossAI : MonoBehaviour {
     private float ground;
     [SerializeField]
     private float air;
+
+    private Transform player;
+
+    private void Start() {
+        player = GameObject.FindWithTag("Player").transform;
+    }
+
+    private void Update() {
+        transform.LookAt(player.position);
+    }
 }

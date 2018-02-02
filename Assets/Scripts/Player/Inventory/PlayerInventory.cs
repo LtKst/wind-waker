@@ -10,17 +10,16 @@ public class PlayerInventory : MonoBehaviour {
 
     [SerializeField]
     private EquipableItem[] storedItems;
-
-    private EquipableItem equippedItem;
+    
     private EquipableItem unequippedItem;
 
     [SerializeField]
     private Transform backPivot;
 
     [HideInInspector]
-    public EquipableItem rightHand;
+    public EquipableItem rightHand = null;
     [HideInInspector]
-    public EquipableItem leftHand;
+    public EquipableItem leftHand = null;
 
     private void Start() {
         playerAnimator = GetComponent<PlayerAnimator>();
@@ -36,7 +35,9 @@ public class PlayerInventory : MonoBehaviour {
     private void Update() {
         for (int i = 0; i < storedItems.Length; i++) {
             if (Input.GetKeyDown(storedItems[i].equipKeyCode)) {
-                if (equippedItem == storedItems[i]) {
+                if (storedItems[i] == rightHand) {
+                    UnequipItem(storedItems[i]);
+                } else if (storedItems[i] == leftHand) {
                     UnequipItem(storedItems[i]);
                 }
                 else {
@@ -47,10 +48,6 @@ public class PlayerInventory : MonoBehaviour {
     }
 
     private void EquipItem(EquipableItem item) {
-        if (equippedItem != null && equippedItem.equipSlot == item.equipSlot) {
-            UnequipItem(equippedItem);
-        }
-
         if (item.equipSlot == EquipableItem.EquipSlot.Right) {
             rightHand = item;
         }
@@ -59,17 +56,15 @@ public class PlayerInventory : MonoBehaviour {
         }
 
         playerAnimator.animator.SetTrigger("Grab");
-
-        equippedItem = item;
     }
 
     private void UnequipItem(EquipableItem item) {
-        unequippedItem = item;
-
         if (item.equipSlot == EquipableItem.EquipSlot.Right) {
+            unequippedItem = rightHand;
             rightHand = null;
         }
         else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
+            unequippedItem = leftHand;
             leftHand = null;
         }
 
@@ -78,26 +73,27 @@ public class PlayerInventory : MonoBehaviour {
 
     private void OnGrabAnimationFinished() {
         // Equip
-        if (rightHand != null) {
+        if (rightHand.name != "Name") {
+            print("right hand equip");
             rightHand.Instance.transform.parent = rightHand.pivotPoint;
             rightHand.Instance.transform.SetPositionAndRotation(rightHand.pivotPoint.position, rightHand.pivotPoint.rotation);
         }
 
-        if (leftHand != null) {
+        if (leftHand.name != "Name") {
             leftHand.Instance.transform.parent = leftHand.pivotPoint;
             leftHand.Instance.transform.SetPositionAndRotation(leftHand.pivotPoint.position, leftHand.pivotPoint.rotation);
         }
 
         // Unequip
         if (unequippedItem != null) {
+            print("unequip");
+
             unequippedItem.Instance.transform.parent = backPivot;
             unequippedItem.Instance.transform.SetPositionAndRotation(backPivot.position, backPivot.rotation);
 
-            if (equippedItem == unequippedItem) {
-                equippedItem = null;
-            }
-
             unequippedItem = null;
         }
+
+        print(rightHand.name);
     }
 }
