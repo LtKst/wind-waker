@@ -23,7 +23,7 @@ public class PlayerHealth : MonoBehaviour {
     {
         if(coll.gameObject.tag == "Enemy" && invis == false)
         {
-            heartPoints -= 7;
+            heartPoints -= 1;
             invis = true;
         }
     }
@@ -41,7 +41,8 @@ public class PlayerHealth : MonoBehaviour {
     void Update()
     {
 
-        Debug.Log(hearts);
+        Debug.Log("Hearts" + hearts);
+        Debug.Log("heart points" + heartPoints);
         if(heartPoints < 0)
         {
             hearts -= 1;
@@ -53,7 +54,7 @@ public class PlayerHealth : MonoBehaviour {
             InvisTimer();
         }
 
-        if(hearts <= 0)
+        if(hearts <= 1 && heartPoints <= 0)
         {
             Dead();
             hearts = -1;
@@ -61,7 +62,7 @@ public class PlayerHealth : MonoBehaviour {
 
     }
 
-    //How long the player is imume
+    //How long the player is immune
     void InvisTimer()
     {
         i += 1;
@@ -94,7 +95,7 @@ public class PlayerHealth : MonoBehaviour {
     public void AddHP()
     {
         Debug.Log("loaded");
-        if(heartPoints < 4 && hearts < 5)
+        if(heartPoints < 4)
         {
             heartPoints += 4;
         }

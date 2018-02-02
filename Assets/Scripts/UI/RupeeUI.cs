@@ -10,6 +10,6 @@ public class RupeeUI : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        scoreText.text = "Rupees: " + Rupee;
+        scoreText.text = "" + Rupee;
 	}
 }
