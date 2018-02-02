@@ -40,9 +40,6 @@ public class PlayerHealth : MonoBehaviour {
     //checks how many hp the player has, and when hes imume
     void Update()
     {
-
-        Debug.Log("Hearts" + hearts);
-        Debug.Log("heart points" + heartPoints);
         if(heartPoints < 0)
         {
             hearts -= 1;

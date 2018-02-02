@@ -17,9 +17,9 @@ public class PlayerInventory : MonoBehaviour {
     private Transform backPivot;
 
     [HideInInspector]
-    public EquipableItem rightHand = null;
+    public EquipableItem rightHand = new EquipableItem();
     [HideInInspector]
-    public EquipableItem leftHand = null;
+    public EquipableItem leftHand = new EquipableItem();
 
     private void Start() {
         playerAnimator = GetComponent<PlayerAnimator>();
@@ -61,11 +61,11 @@ public class PlayerInventory : MonoBehaviour {
     private void UnequipItem(EquipableItem item) {
         if (item.equipSlot == EquipableItem.EquipSlot.Right) {
             unequippedItem = rightHand;
-            rightHand = null;
+            rightHand = new EquipableItem();
         }
         else if (item.equipSlot == EquipableItem.EquipSlot.Left) {
             unequippedItem = leftHand;
-            leftHand = null;
+            leftHand = new EquipableItem();
         }
 
         playerAnimator.animator.SetTrigger("Grab");
